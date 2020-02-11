@@ -198,9 +198,9 @@ def register_all_pascal_voc(root="datasets"):
         ("voc_2007_train", "VOC2007", "train"),
         ("voc_2007_val", "VOC2007", "val"),
         ("voc_2007_test", "VOC2007", "test"),
-        ("voc_2012_trainval", "VOC2012", "trainval"),
-        ("voc_2012_train", "VOC2012", "train"),
-        ("voc_2012_val", "VOC2012", "val"),
+        # ("voc_2012_trainval", "VOC2012", "trainval"),
+        # ("voc_2012_train", "VOC2012", "train"),
+        # ("voc_2012_val", "VOC2012", "val"),
     ]
     for name, dirname, split in SPLITS:
         year = 2007 if "2007" in name else 2012
@@ -209,7 +209,7 @@ def register_all_pascal_voc(root="datasets"):
 
 
 # Register them all under "./datasets"
-register_all_coco()
-register_all_lvis()
-register_all_cityscapes()
+# register_all_coco()
+# register_all_lvis()
+# register_all_cityscapes()
 register_all_pascal_voc()
