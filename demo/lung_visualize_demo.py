@@ -2,7 +2,7 @@
 import cv2
 import random
 from detectron2.utils.visualizer import Visualizer
-from lung_dataset import *
+from projects.lung_project.lung_dataset import *
 
 
 def lung_visualize_demo(test_dirname, predictor, dataset_metadata, test_data_csv_path, output_dir):
