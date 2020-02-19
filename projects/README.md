@@ -7,3 +7,6 @@ maintainable.
 + [Scale-Aware Trident Networks for Object Detection](TridentNet)
 + [TensorMask: A Foundation for Dense Object Segmentation](TensorMask)
 + Mesh R-CNN.  (Coming Soon)
+========================= my customdataset ==========================================
++[lung_project: 
++[mammography_project: 
