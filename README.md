@@ -84,6 +84,11 @@ And see [projects/](projects/) for some projects that are built on top of detect
 
 We provide a large set of baseline results and trained models available for download in the [Detectron2 Model Zoo](MODEL_ZOO.md).
 
+## added part for custom dataset
+- projects/your_custom_project, including 3 files(debug_for_verify_data.py, custom_dataset.py, custom_train_script.py)
+- tools/gen_csv
+- detectron2/evaluation/your_custom_dataset_evaluation.py
+- demo/your_custom_dataset_visualize_demo.py
 
 ## License
 
