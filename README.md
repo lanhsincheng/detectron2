@@ -85,10 +85,13 @@ And see [projects/](projects/) for some projects that are built on top of detect
 We provide a large set of baseline results and trained models available for download in the [Detectron2 Model Zoo](MODEL_ZOO.md).
 
 ## Added part for custom dataset
+##### 註冊(register)custom dataset
 - projects/your_custom_project, including 3 files(debug_for_verify_data.py, custom_dataset.py, custom_train_script.py)
-- tools/gen_csv
+##### evaluation by metric(pascal/coco etc.)
 - detectron2/evaluation/your_custom_dataset_evaluation.py
 - demo/your_custom_dataset_visualize_demo.py
+##### 製作data csv for parsing(txt也可以，用於提供training data及testing data目錄)
+- tools/gen_csv
 
 ## Files for custom dataset
 - debug_for_verify_data.py : 用於在training之前確認input的影像和其對應的label位置是否正確(確認input是否正確)  
@@ -98,6 +101,25 @@ We provide a large set of baseline results and trained models available for down
 - your_custom_dataset_evaluation.py : 建構DatasetEvaluator，現在mammo_dataset_evaluation.py是參考pascal_voc_evaluation.py
 - your_custom_dataset_visualize_demo.py : 讀取inference完的data並輸出
 
+## About train_script
+##### 註冊(register)custom dataset
+```python
+mammo_metadata = register_all_mammo_dataset(root_of_data_csv_path, dirname, dirname)
+```
+這裡的**register_all_mammo_dataset**會進到mammo_dataset.py最終會return mamo_metadata，也可以不return任何東西，主要跑mammo_dataset.py是為了註冊dataset，如下程式碼的**register_mammo_datasetfunction**
+```python
+    for name, dirname, split in SPLITS:
+        # print(name, dirname, root_of_data_csv_path + '/' + split)
+        register_mammo_dataset(name, dirname, root_of_data_csv_path + '/' + split) #dirname = r'D:\Mammograph\training_dataset'
+```
+##### evaluation by metric(pascal/coco etc.)
+利用註冊的DatasetEvaluator進行inference即evaluation
+```python
+evaluator = MammoDatasetEvaluator("mammo_dataset_test")
+val_loader = build_detection_test_loader(cfg, "mammo_dataset_test")
+# meth'inference_on_dataset'. The return value of `evaluator.evaluate()
+inference_on_dataset(predictor.model, val_loader, evaluator)
+```
 ## License
 
 Detectron2 is released under the [Apache 2.0 license](LICENSE).
