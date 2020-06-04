@@ -84,12 +84,13 @@ And see [projects/](projects/) for some projects that are built on top of detect
 
 We provide a large set of baseline results and trained models available for download in the [Detectron2 Model Zoo](MODEL_ZOO.md).
 
-## added part for custom dataset
+## Added part for custom dataset
 - projects/your_custom_project, including 3 files(debug_for_verify_data.py, custom_dataset.py, custom_train_script.py)
 - tools/gen_csv
 - detectron2/evaluation/your_custom_dataset_evaluation.py
 - demo/your_custom_dataset_visualize_demo.py
 
+## Files for custom dataset
 - debug_for_verify_data.py : 用於在training之前確認input的影像和其對應的label位置是否正確(確認input是否正確)  
 - custom_dataset.py : parsing dataset變成model的輸入格式
 - custom_train_script.py : train script, 用於配置網路的一些parameters 
