@@ -89,6 +89,7 @@ We provide a large set of baseline results and trained models available for down
 - projects/your_custom_project, including 3 files(debug_for_verify_data.py, custom_dataset.py, custom_train_script.py)
 ##### evaluation by metric(pascal/coco etc.)
 - detectron2/evaluation/your_custom_dataset_evaluation.py
+##### visualize inference data 
 - demo/your_custom_dataset_visualize_demo.py
 ##### 製作data csv for parsing(txt也可以，用於提供training data及testing data目錄)
 - tools/gen_csv
