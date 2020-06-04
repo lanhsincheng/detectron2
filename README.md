@@ -90,6 +90,13 @@ We provide a large set of baseline results and trained models available for down
 - detectron2/evaluation/your_custom_dataset_evaluation.py
 - demo/your_custom_dataset_visualize_demo.py
 
+debug_for_verify_data.py : 用於在training之前確認input的影像和其對應的label位置是否正確(確認input是否正確)  
+custom_dataset.py : parsing dataset變成model的輸入格式
+custom_train_script.py : train script, 用於配置網路的一些parameters 
+gen_csv : 輸入xml以及jpg用以形成custom_dataset.py可以parsing的檔案
+your_custom_dataset_evaluation.py : 建構DatasetEvaluator，現在mammo_dataset_evaluation.py是參考pascal_voc_evaluation.py
+your_custom_dataset_visualize_demo.py : 讀取inference完的data並輸出
+
 ## License
 
 Detectron2 is released under the [Apache 2.0 license](LICENSE).
