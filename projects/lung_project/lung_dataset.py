@@ -16,8 +16,12 @@ CLASS_NAMES = [
 # fmt: on
 
 # dirname include Annotations and JPEGImages files
+#1203
 dirname = r'D:\lung_data_laptop\_lung_data_laptop\1203_data\1cls_res50_gray_train'
 test_dirname = r'D:\lung_data_laptop\_lung_data_laptop\1203_data\1cls_res50_gray_test'
+#lung_526
+# dirname = r'D:\lung_data_laptop\_lung_data_laptop\0409_lung_526\1cls_res50_gray_train'
+# test_dirname = r'D:\lung_data_laptop\_lung_data_laptop\0409_lung_526\1cls_res50_gray_test'
 # name to register for newly added datasets
 name = "lung_dataset"
 
@@ -93,7 +97,7 @@ def register_lung_dataset(name, dirname, data_csv_path):
 def register_all_lung_dataset(root_of_data_csv_path, dirname, test_dirname): #root_of_data_csv_path = r'./training_data_csv/lung_dataset/'
     SPLITS = [
         ("lung_dataset_train", dirname, "train.csv"),
-        ("lung_dataset_val", dirname, "val.csv"),
+        # ("lung_dataset_val", dirname, "val.csv"),
         ("lung_dataset_trainval", dirname, "trainval.csv"),
         ("lung_dataset_test", test_dirname, "test.csv"),
     ]

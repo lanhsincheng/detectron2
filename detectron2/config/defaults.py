@@ -24,6 +24,7 @@ _C.MODEL.LOAD_PROPOSALS = False
 _C.MODEL.MASK_ON = False
 _C.MODEL.KEYPOINT_ON = False
 _C.MODEL.DEVICE = "cuda"
+# _C.MODEL.DEVICE = "cpu" # try to export onnx should use cpu
 _C.MODEL.META_ARCHITECTURE = "GeneralizedRCNN"
 
 # Path (possibly with schema like catalog:// or detectron2://) to a checkpoint file
@@ -419,7 +420,7 @@ _C.MODEL.RETINANET.PRIOR_PROB = 0.01
 
 # Inference cls score threshold, only anchors with score > INFERENCE_TH are
 # considered for inference (to improve speed)
-_C.MODEL.RETINANET.SCORE_THRESH_TEST = 0.05
+_C.MODEL.RETINANET.SCORE_THRESH_TEST = 0.05 #0.05
 _C.MODEL.RETINANET.TOPK_CANDIDATES_TEST = 1000
 _C.MODEL.RETINANET.NMS_THRESH_TEST = 0.5
 
@@ -431,6 +432,17 @@ _C.MODEL.RETINANET.FOCAL_LOSS_GAMMA = 2.0
 _C.MODEL.RETINANET.FOCAL_LOSS_ALPHA = 0.25
 _C.MODEL.RETINANET.SMOOTH_L1_LOSS_BETA = 0.1
 
+# ---------------------------------------------------------------------------- #
+# ClsNets
+# ---------------------------------------------------------------------------- #
+_C.MODEL.CLSNET = CN()
+_C.MODEL.CLSNET.ENABLE = False
+# classes number
+_C.MODEL.CLSNET.NUM_CLASSES = 1000
+# In features
+_C.MODEL.CLSNET.IN_FEATURES = ['linear']
+# Input Size
+_C.MODEL.CLSNET.INPUT_SIZE = 224
 
 # ---------------------------------------------------------------------------- #
 # ResNe[X]t options (ResNets = {ResNet, ResNeXt}
@@ -522,8 +534,8 @@ _C.TEST = CN()
 # e.g.: [['bbox', 'AP', 38.5, 0.2]]
 _C.TEST.EXPECTED_RESULTS = []
 # The period (in terms of steps) to evaluate the model during training.
-# Set to 0 to disable.
-_C.TEST.EVAL_PERIOD = 0
+# Set to 0 to disable. default set to 0.
+_C.TEST.EVAL_PERIOD = 5
 # The sigmas used to calculate keypoint OKS.
 # When empty it will use the defaults in COCO.
 # Otherwise it should have the same length as ROI_KEYPOINT_HEAD.NUM_KEYPOINTS.

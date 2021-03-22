@@ -8,6 +8,8 @@ from .panoptic_evaluation import COCOPanopticEvaluator
 from .pascal_voc_evaluation import PascalVOCDetectionEvaluator
 from .lung_dataset_evaluation import LungDatasetEvaluator
 from .mammo_dataset_evaluation import MammoDatasetEvaluator
+from .mango_dataset_evaluation import MangoDatasetEvaluator
+from .imagenet_evaluation import ImageNetEvaluator
 from .sem_seg_evaluation import SemSegEvaluator
 from .testing import print_csv_format, verify_results
 

@@ -48,9 +48,9 @@ def convert_annotation(csv, address_list):
 if __name__ == "__main__":
     args = parse_args()
     # the path that contains Annotations and JPEGImages
-    # file_address = r'D:\lung_data_laptop\_lung_data_laptop\1007_data\2cls_res50_gray_train'
+    file_address = r'D:\lung_data_laptop\_lung_data_laptop\1203_data\1cls_res50_gray_test'
     # file_address = r'D:\Mammograph\training_dataset'
-    file_address = r'D:\Mammograph\reference_dataset\INbreast Release 1.0\INbreast Release 1.0'
+    # file_address = r'D:\Mammograph\reference_dataset\INbreast Release 1.0\INbreast Release 1.0'
     test_percent = args.percent
     train_csv = args.train
     test_csv = args.val
@@ -68,7 +68,7 @@ if __name__ == "__main__":
     print(num)
     #test = random.sample(k=math.ceil(num*test_percent), population=Annotations)
     # test = random.sample(k=380, population=Annotations)
-    test = random.sample(k=30, population=Annotations)
+    test = random.sample(k=0, population=Annotations)
     train = list(set(Annotations) - set(test))
     print('train: ', len(train))
     print('test: ', len(test))

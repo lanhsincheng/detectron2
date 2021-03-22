@@ -62,9 +62,9 @@ class GeneralizedRCNN(nn.Module):
                 The :class:`Instances` object has the following keys:
                     "pred_boxes", "pred_classes", "scores", "pred_masks", "pred_keypoints"
         """
-        if not self.training:
+        if not self.training:  # attributte inherit from nn.Module
             return self.inference(batched_inputs)
-
+        self.train()
         images = self.preprocess_image(batched_inputs)
         if "instances" in batched_inputs[0]:
             gt_instances = [x["instances"].to(self.device) for x in batched_inputs]
@@ -143,8 +143,10 @@ class GeneralizedRCNN(nn.Module):
         """
         Normalize, pad and batch the input images.
         """
+
         images = [x["image"].to(self.device) for x in batched_inputs]
         images = [self.normalizer(x) for x in images]
+        #  Pad the image so they can be divisible by a stride
         images = ImageList.from_tensors(images, self.backbone.size_divisibility)
         return images
 

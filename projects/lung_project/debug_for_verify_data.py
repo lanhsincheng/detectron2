@@ -10,14 +10,14 @@ from detectron2.utils.visualizer import Visualizer
 dirname = r'D:\lung_data_laptop\_lung_data_laptop\1203_data\1cls_res50_gray_train'
 test_dirname = r'D:\lung_data_laptop\_lung_data_laptop\1203_data\1cls_res50_gray_test'
 # csv root, for reading train and val parts purpose
-root_of_data_csv_path = r'./training_data_csv/lung_dataset/'
-train_data_csv_path = r'./training_data_csv/lung_dataset/train.csv'
-val_data_csv_path = r'./training_data_csv/lung_dataset/val.csv'
+root_of_data_csv_path = r'D:\PycharmProjects\detectron2\training_data_csv\lung_dataset/'
+train_data_csv_path = r'D:\PycharmProjects\detectron2\training_data_csv\lung_dataset/train.csv'
+val_data_csv_path = r'D:\PycharmProjects\detectron2\training_data_csv\lung_dataset/test.csv'
 
 
 dataset_dicts = get_lung_dicts(dirname,train_data_csv_path)
 lung_metadata = register_all_lung_dataset(root_of_data_csv_path, dirname, test_dirname)
-for d in random.sample(dataset_dicts, 15):
+for d in random.sample(dataset_dicts, 20):
     img = cv2.imread(d["file_name"])
     visualizer = Visualizer(img[:, :, ::-1], metadata=lung_metadata, scale=0.5)
     vis = visualizer.draw_dataset_dict(d)

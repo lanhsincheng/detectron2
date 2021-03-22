@@ -8,17 +8,36 @@ import xml.etree.ElementTree as ET
 import csv
 
 # fmt: off
+# CLASS_NAMES = [
+#     "Asymmetry", "Calcification", "Cluster", "Spiculated Region", "Distortion", "Mass", "Point 3", "Point 1", "Unnamed",
+# ]
+# CLASS_NAMES = [
+#     "malignant",
+# ]
 CLASS_NAMES = [
-    "malignant",
+    "benign", "malignant",
 ]
+# CLASS_NAMES = [
+#     "benign", "malignant", "benign0gabor", "malignant0gabor", "benign1gabor", "malignant1gabor", "benign2gabor", "malignant2gabor",
+# ]
+# CLASS_NAMES = [
+#     "0", "1",
+# ]
 # fmt: on
 
 # dirname include Annotations and JPEGImages files
-dirname = r'D:\Mammograph\training_dataset'
+# dirname = r'D:\Mammograph\training_dataset'
+dirname = r'D:\Mammograph\ROI_training_dataset'
+# dirname = r'D:\Mammograph\gabor_training_dataset'
+# dirname = r'D:\Mammograph\DDSM_training_dataset'
+# dirname = r'D:\Mammograph\concate_training_dataset'
+# dirname = r'D:\Mammograph\reference_dataset\INbreast Release 1.0'
+
 # name to register for newly added datasets
 name = "mammo_dataset"
 # csv root, for reading train and val parts purpose
 root_of_data_csv_path = r'D:\PycharmProjects\detectron2\training_data_csv\mammo_dataset/'
+# root_of_data_csv_path = r'D:\PycharmProjects\detectron2\training_data_csv\INbreast/'
 
 def get_train_dataset_path(data_csv_path):
 
@@ -52,6 +71,8 @@ def get_mammo_dicts(dirname,data_csv_path):
 
         for obj in tree.findall("object"):
             cls = obj.find("name").text
+            if cls==None:
+                print(fileid)
             bbox = obj.find("bndbox")
             bbox = [float(bbox.find(x).text) for x in ["xmin", "ymin", "xmax", "ymax"]]
             # Original annotations are integers in the range [1, W or H]
@@ -95,5 +116,5 @@ def register_all_mammo_dataset(root_of_data_csv_path, dirname, test_dirname): #r
         # MetadataCatalog.get(name).evaluator_type = "pascal_voc"
     return mammo_metadata
 
-# register_all_mammo_dataset(root_of_data_csv_path, dirname, test_dirname)
+# register_all_mammo_dataset(root_of_data_csv_path, dirname, dirname)
 # get_train_dataset_path(test_data_csv_path)

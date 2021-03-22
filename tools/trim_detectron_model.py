@@ -5,9 +5,13 @@ from detectron2.config import get_cfg
 
 """
 To trim last layers' parameter, becasuse as pretrain model, different class numbers' weight might affect result of target dataset training
+e.g. one class weight dominate finune model class' weights
 """
 
 cfg = get_cfg()
+modified_model_path = r"C:\Users\Lan-Hsin Cheng\.cache\torch\checkpoints/tf_efficientnet_b6_aa-80ba17e4.pth"
+save_model_path = r"./converted_trimC:\Users\Lan-Hsin Cheng\.cache\torch\checkpoints/tf_efficientnet_b6_aa-80ba17e4.pth"
+corresponding_yaml_path = r"D:\PycharmProjects\pytorch-image-models\output\train\20200710-163606-tf_efficientnet_b6-528/args.yaml"
 
 def removekey(d, listofkeys): # listofkeys = ['cls_score.bias', 'cls_score.weight', 'bbox_pred.bias', 'bbox_pred.weight']
     r = dict(d)
@@ -21,21 +25,21 @@ parser = argparse.ArgumentParser(description="Trim Detection weights and save in
 parser.add_argument(
     "--pretrained_path",
     # default="~/.torch/models/_detectron_35858933_12_2017_baselines_e2e_mask_rcnn_R-50-FPN_1x.yaml.01_48_14.DzEQe4wC_output_train_coco_2014_train%3Acoco_2014_valminusminival_generalized_rcnn_model_final.pkl",
-    default="D:\PycharmProjects\detectron2\output\model final HISTORY\inbreast_FROM_SCRATCH_faster_rcnn_R_50_fpn_model_final/model_0089999.pth",
+    default=modified_model_path,
     help="path to detectron pretrained weight(.pkl)",
     type=str,
 )
 parser.add_argument(
     "--save_path",
     # default="./pretrained_model/mask_rcnn_R-50-FPN_1x_detectron_no_last_layers.pth",
-    default="./converted_trim_model/modified.pth",
+    default=save_model_path,
     help="path to save the converted model",
     type=str,
 )
 parser.add_argument(
     "--cfg",
     # default="configs/e2e_mask_rcnn_R_50_FPN_1x.yaml",
-    default="D:\PycharmProjects\detectron2\detectron2\model_zoo\configs\COCO-Detection/faster_rcnn_R_50_FPN_3x.yaml",
+    default=corresponding_yaml_path,
     help="path to config file",
     type=str,
 )

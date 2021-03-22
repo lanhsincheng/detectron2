@@ -350,6 +350,7 @@ class Visualizer:
             alpha = 0.8
         else:
             colors = None
+            # colors = [np.array([0.667, 0.   , 0.   ])]
             alpha = 0.5
 
         if self._instance_mode == ColorMode.IMAGE_BW:
@@ -589,7 +590,8 @@ class Visualizer:
         for i in range(num_instances):
             color = assigned_colors[i]
             if boxes is not None:
-                self.draw_box(boxes[i], edge_color=color)
+                # self.draw_box(boxes[i], edge_color=color)
+                self.draw_box(boxes[i], alpha=1, edge_color="b")
 
             if masks is not None:
                 for segment in masks[i].polygons:

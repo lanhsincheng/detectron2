@@ -17,6 +17,7 @@ from detectron2.utils import comm
 from .evaluator import DatasetEvaluator
 
 
+
 class LungDatasetEvaluator(DatasetEvaluator):
     """
     Evaluate Pascal VOC AP.
@@ -91,7 +92,7 @@ class LungDatasetEvaluator(DatasetEvaluator):
 
                 count = 0
                 # main strp to calculate evaluation
-                for thresh in range(50, 100, 5): #50-100, step_len:5
+                for thresh in range(20, 100, 5): #50-100, step_len:5
                     rec, prec, ap = voc_eval(
                         res_file_template,
                         self._anno_file_template,
@@ -100,7 +101,12 @@ class LungDatasetEvaluator(DatasetEvaluator):
                         ovthresh=thresh / 100.0,
                         use_07_metric=self._is_2007,
                     )
-                    # print('rec='  ,rec ,' ', 'prec=' , prec, ' ', 'ap=',ap)
+                    # if thresh == 20:
+                    #     print('20rec=', rec, ' ', '20prec=', prec)
+                    # if thresh == 30:
+                    #     print('30rec=', rec, ' ', '30prec=', prec)
+                    # if thresh == 40:
+                    #     print('40rec=', rec, ' ', '40prec=', prec)
                     count += 1
                     # print(count)#(=10) 50-100 with 5 as interval total has 10 evaluation threshold
                     aps[thresh].append(ap * 100)

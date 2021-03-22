@@ -20,7 +20,8 @@ from .catalog import DatasetCatalog, MetadataCatalog
 from .common import DatasetFromList, MapDataset
 from .dataset_mapper import DatasetMapper
 from .detection_utils import check_metadata_consistency
-
+##### revise
+from projects.mammography_project.mammo_dataloader import resize_mammo_mapper
 """
 This file contains the default logic to build a dataloader for training or testing.
 """
@@ -289,8 +290,8 @@ def get_detection_dataset_dicts(
             pass
     return dataset_dicts
 
-
-def build_detection_train_loader(cfg, mapper=None):
+##### revise mapper = None
+def build_detection_train_loader(cfg, mapper=resize_mammo_mapper):
     """
     A data loader is created by the following steps:
 
@@ -367,8 +368,8 @@ def build_detection_train_loader(cfg, mapper=None):
     )
     return data_loader
 
-
-def build_detection_test_loader(cfg, dataset_name, mapper=None):
+##### revise mapper = None
+def build_detection_test_loader(cfg, dataset_name, mapper=resize_mammo_mapper):
     """
     Similar to `build_detection_train_loader`.
     But this function uses the given `dataset_name` argument (instead of the names in cfg),

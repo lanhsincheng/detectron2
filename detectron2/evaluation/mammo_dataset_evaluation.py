@@ -16,9 +16,10 @@ from detectron2.utils import comm
 
 from .evaluator import DatasetEvaluator
 
+
 # for evaluation purpose
 test_csv_path = r'D:\PycharmProjects\detectron2\training_data_csv\mammo_dataset\test.csv'
-
+# test_csv_path = r'D:\PycharmProjects\detectron2\training_data_csv\INbreast\test.csv'
 class MammoDatasetEvaluator(DatasetEvaluator):
     """
     Evaluate Pascal VOC AP.
@@ -93,7 +94,7 @@ class MammoDatasetEvaluator(DatasetEvaluator):
 
                 count = 0
                 # main strp to calculate evaluation
-                for thresh in range(50, 100, 5): #50-100, step_len:5
+                for thresh in range(20, 100, 5): #50-100, step_len:5
                     rec, prec, ap = voc_eval(
                         res_file_template,
                         self._anno_file_template,
@@ -102,19 +103,29 @@ class MammoDatasetEvaluator(DatasetEvaluator):
                         ovthresh=thresh / 100.0,
                         use_07_metric=self._is_2007,
                     )
-                    # print('rec='  ,rec ,' ', 'prec=' , prec, ' ', 'ap=',ap)
+                    # if thresh == 20:
+                    #     print('20rec=', rec, ' ', '20prec=', prec)
+                    # if thresh == 30:
+                    #     print('30rec=', rec, ' ', '30prec=', prec)
+                    # if thresh == 40:
+                    #     print('40rec=', rec, ' ', '40prec=', prec)
+                    # if thresh==50:
+                    #     print('50rec='  ,rec ,' ', '50prec=' , prec)
                     count += 1
                     # print(count)#(=10) 50-100 with 5 as interval total has 10 evaluation threshold
                     aps[thresh].append(ap * 100)
 
 
         ret = OrderedDict()
-        print('aps= ', aps)
+        # print('aps= ', aps)
         mAP = {iou: np.mean(x) for iou, x in aps.items()}
         print('mAP= ', mAP)
         ret["bbox"] = {"AP": np.mean(list(mAP.values())), "AP50": mAP[50], "AP75": mAP[75]}
         print(ret)
-        return ret
+        # print('recall= ', rec)
+        # print('precision= ', prec)
+
+        return ret, mAP[50]
 
 
 ##############################################################################

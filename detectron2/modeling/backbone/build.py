@@ -4,7 +4,9 @@ from detectron2.utils.registry import Registry
 
 from .backbone import Backbone
 
+# To create a registry (inside detectron2) of Class Registry
 BACKBONE_REGISTRY = Registry("BACKBONE")
+# to define the document of the BACKBONE_REGISTRY
 BACKBONE_REGISTRY.__doc__ = """
 Registry for backbones, which extract feature maps from images
 
@@ -27,6 +29,7 @@ def build_backbone(cfg, input_shape=None):
     if input_shape is None:
         input_shape = ShapeSpec(channels=len(cfg.MODEL.PIXEL_MEAN))
 
+    # get BACKBONE.NAME from yaml
     backbone_name = cfg.MODEL.BACKBONE.NAME
     backbone = BACKBONE_REGISTRY.get(backbone_name)(cfg, input_shape)
     assert isinstance(backbone, Backbone)

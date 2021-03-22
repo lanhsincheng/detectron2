@@ -7,7 +7,7 @@ from detectron2.layers import ShapeSpec
 __all__ = ["Backbone"]
 
 
-class Backbone(nn.Module, metaclass=ABCMeta):
+class Backbone(nn.Module, metaclass=ABCMeta): # inherit from Class nn.Module
     """
     Abstract base class for network backbones.
     """
@@ -20,6 +20,7 @@ class Backbone(nn.Module, metaclass=ABCMeta):
 
     @abstractmethod
     def forward(self):
+        # takes care of running the registered hooks, one should call the Module instance afterwards instead of this
         """
         Subclasses must override this method, but adhere to the same return type.
 

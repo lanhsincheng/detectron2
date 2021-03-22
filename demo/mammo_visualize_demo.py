@@ -1,4 +1,4 @@
-# from detectron2.utils.visualizer import ColorMode
+from detectron2.utils.visualizer import ColorMode
 import cv2
 import random
 from detectron2.utils.visualizer import Visualizer
@@ -14,7 +14,7 @@ def mammo_visualize_demo(test_dirname, predictor, dataset_metadata, test_data_cs
         v = Visualizer(im[:, :, ::-1],
                        metadata=dataset_metadata,
                        scale=0.8,
-                       # instance_mode=ColorMode.IMAGE_BW   # remove the colors of unsegmented pixels
+                       # instance_mode=ColorMode.SEGMENTATION   # remove the colors of unsegmented pixels
         )
         v = v.draw_instance_predictions(outputs["instances"].to("cpu"))
         cv2.imwrite(output_dir + '/' + d["image_id"] + '.jpg', v.get_image()[:, :, ::-1])
